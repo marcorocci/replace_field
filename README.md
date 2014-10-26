@@ -5,11 +5,11 @@ Replace a string inside a separator
 
 **********************
 	field_substitution(int argc, char* argv[]) :  \
-  position( (int) argv[1][0] - '0'),            \
+  	position( (int) argv[1][0] - '0'),            \
 	separator(argv[2]), ReplaceWith(argv[3]),     \
 	path(argv[4]){}                                                           // costructor
 	field_substitution() {}                                                   // costructor
-  ~field_substitution() {}                                                  // destructor
+  	~field_substitution() {}                                                  // destructor
   
 	int field_pos(int f_p){position = f_p; return position;};                 // Add Position of field, starting with 0 to Max
 	string field_sep(string f_s){separator = f_s; return separator;};         // Add separator, where the string is delimited 
