@@ -37,10 +37,11 @@ public:
 
 int field_substitution::field_go()
 {
-	string linea, linea2, path_2 = path;
+	string linea, path_2 = path;
 	path_2 += "_replaced.txt";
 
 	int count = 0, len_replace = 0;
+
 
 	ifstream file;
 	file.open(path.c_str(), ifstream::in);
@@ -58,22 +59,25 @@ int field_substitution::field_go()
 			if (linea.substr(i,1) == separator.c_str())
 				count++;
 
-			if (count == position)
+			if ( (count == position) )
 			{
 				for(unsigned int j=i+1; j<linea.length(); j++)
 				{
-					if((linea.substr(j,1) == "\n") or (linea.substr(j,1) == separator.c_str() ))
+					if(( j == linea.length() -1) or (linea.substr(j,1) == separator.c_str() ))
 					{
-						len_replace = j-1;
+						if( linea.substr(j,1) == separator.c_str() )
+							len_replace = j-1;
+						else
+							len_replace = j+1;
+						cout<<"len_replace: "<<len_replace<<endl;
 						break;
 					}
-
-					linea2 += linea.substr(j,1);
 				}
 
-				linea2 = "";
-
-				linea.replace(i+1,len_replace-2,ReplaceWith);
+				if (position == 0)
+					linea.replace(i, len_replace - (i-1), ReplaceWith);
+				else
+					linea.replace(i+1,len_replace - (i),ReplaceWith);
 			}
 
 			if (count == position)
