@@ -9,7 +9,6 @@
 #include <fstream>
 #include <string>
 #include <string.h>
-#include <stdlib.h>
 
 using namespace std;
 
@@ -29,14 +28,14 @@ public:
 	~field_substitution(){}
 
 	int field_pos(int f_p){position = f_p; return position;}; // Add Position of field, starting with 0 to Max
-	string field_sep(string f_s){separator = f_s; return separator;}; // Add separator, where the string is delimited 
+	string field_sep(string f_s){separator = f_s; return separator;}; // Add separator, where the string is delimited
 	string field_replace(string f_r){ReplaceWith = f_r; return ReplaceWith;}; // The field will be replaced with this string
 	string field_path(string f_p){path = f_p; return path;};  // Add the pathfile
 
-	void field_go();  // Replace the field, delimited with separator, with my string
+	int field_go();  // Replace the field, delimited with separator, with my string
 };
 
-void field_substitution::field_go()
+int field_substitution::field_go()
 {
 	string linea, linea2, path_2 = path;
 	path_2 += "_replaced.txt";
@@ -90,6 +89,7 @@ void field_substitution::field_go()
 	file.close();
 	replace.close();
 
+	return 0;
 }
 
 
@@ -102,7 +102,10 @@ if(argc >= 5)
 
 		field_substitution C = field_substitution(argc,argv);
 
-		C.field_go();
+		cout<<"Replacing the field..."<<endl;
+
+		if (C.field_go() == 0 )
+			cout<<"File written"<<endl;
 
 		return 0;
 	}
