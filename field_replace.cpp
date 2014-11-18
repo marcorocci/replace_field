@@ -9,6 +9,7 @@
 #include <fstream>
 #include <string>
 #include <string.h>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -23,7 +24,7 @@ private:
 
 public:
 
-	field_substitution(int argc, char* argv[]) :  position( (int) argv[1][0] - '0'), separator(argv[2]), ReplaceWith(argv[3]), path(argv[4]){	}
+	field_substitution(int argc, char* argv[]) :  position( atoi(argv[1])), separator(argv[2]), ReplaceWith(argv[3]), path(argv[4]){	}
 	field_substitution() {}
 	~field_substitution(){}
 
@@ -114,5 +115,5 @@ if(argc >= 5)
 		return 0;
 	}
 	else
-		cout<<"Errore: parametri non sufficienti: \n\n esempio:\n 1,\"i,\"ciao\",\"C:\\Users\\Utente\\Desktop\\log.txt"<<endl;
+		cout<<"Errore: parametri non sufficienti: \n\n esempio:\n 1 \"i \"ciao\" \"C:\\Users\\Utente\\Desktop\\log.txt\""<<endl;
 }
